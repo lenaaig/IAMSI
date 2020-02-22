@@ -1,0 +1,92 @@
+CLIPS> (reset)
+
+=> reset l'arbre
+
+CLIPS> (rules)
+my_init
+grand_pere1
+grand_pere2
+parent1
+parent2
+frere_et_soeur
+For a total of 6 defrules.
+
+=> donnes les regles présentes
+
+CLIPS> (facts)
+f-0     (initial-fact)
+For a total of 1 fact.
+
+=> donne la base de fait initial
+
+CLIPS> (agenda)
+0      my_init: f-0
+For a total of 1 activation.
+
+=> donne l'agenda avec les regles qui peuvent être utilisées (avec les faits ajoutés) pour modifier la base de fait
+
+
+CLIPS> (run)
+==> f-1     (pere claire jean)
+==> f-2     (pere bob jean)
+==> f-3     (pere yves bob)
+==> f-4     (mere yves zoe)
+==> f-5     (mere luc claire)
+==> f-6     (mere alain claire)
+FIRE    2 grand_pere2: f-6,f-1
+==> f-7     (grand_pere alain jean)
+FIRE    3 parent2: f-6
+==> f-8     (parent alain claire)
+FIRE    4 grand_pere2: f-5,f-1
+==> f-9     (grand_pere luc jean)
+FIRE    5 parent2: f-5
+==> f-10    (parent luc claire)
+FIRE    6 frere_et_soeur: f-10,f-8
+==> f-11    (frere_et_soeur luc alain)
+==> f-12    (frere_et_soeur alain luc)
+FIRE    7 frere_et_soeur: f-8,f-10
+FIRE    8 parent2: f-4
+==> f-13    (parent yves zoe)
+FIRE    9 grand_pere1: f-3,f-2
+==> f-14    (grand_pere yves jean)
+FIRE   10 parent1: f-3
+==> f-15    (parent yves bob)
+FIRE   11 parent1: f-2
+==> f-16    (parent bob jean)
+FIRE   12 parent1: f-1
+==> f-17    (parent claire jean)
+FIRE   13 frere_et_soeur: f-17,f-16
+==> f-18    (frere_et_soeur claire bob)
+==> f-19    (frere_et_soeur bob claire)
+FIRE   14 frere_et_soeur: f-16,f-17
+
+=> donne les regles activées
+
+Question3
+
+(watch rules) va permettre de voir les fleches en sens inverses quand on fait le (reset).
+
+(unwatch rules) ne change rien car dans le fichier famille.clp il y a deja (watch rules) qui va s'éxécuter pendant le (run). Il n'y a pas donc pas moyen de faire unwatch facts avant car il doit être appliqué avant le (run) mais le run va l'inhiber.
+
+Question4
+
+En rajoutant le fait 	(assert (mere charle zoe)) on peut voir qu'il y a plus de lignes d'éxécution.
+
+Question8
+
+Le resultat ne semble pas être correct car on dit que bob est enfant unique puis on lui rajoute une soeur claire sans enlever le fait que bob soit enfnat unique.
+
+Question 9
+
+On va enlever de l'importance à la regle enfant_unique_priorite de telle sorte à passer par cette regle à la fin, afin que les freres et soeurs soient deja définis avant.
+
+Question10
+
+On rajoute une regle naissance.
+
+
+Exercice 2
+
+3. Il prend la premiere disponible dans l'agenda.
+
+4. Par chainage avant.
