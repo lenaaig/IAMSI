@@ -1,0 +1,6 @@
+c Petit exemple illustratif
+c
+p cnf 5 3
+-5 4 0
+-1 5 3 4 0
+-3 -4 0
